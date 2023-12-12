@@ -350,17 +350,6 @@ public class BoletinArrays {
 	private static void ejercicio6() {
 		int opcion;
 		int array[]= new int[20];
-
-		
-//		do {
-//		System.out.println(Arrays.toString(array));
-//			System.out.println();
-//			escogerAsiento(array);
-//			System.out.println("¿Quiere escoger asiento?"
-//					+ "\n1. Si "
-//					+ "\n2. No");
-//			opcion=Teclado.recogerOpcionMenu(1, 2);
-//		}while(opcion!=2);
 		
 		do {
 			mostrarMenuPrincipal();
@@ -392,7 +381,12 @@ public class BoletinArrays {
 			System.out.println(Arrays.toString(array)); //Uso la clase Arrays.toString y muestro el contenido del array
 		}
 		case 2->{//Si la opción es 2
-			escogerAsiento(array);//llamo al método de escoger asiento
+			if (!comprobarAvionLLeno(array)) {
+				escogerAsiento(array);//llamo al método de escoger asiento
+			}else {
+				System.out.println("Lo siento el avión está lleno, el próximo vuelo saldrá mañana");
+				System.exit(0);//Muestro el mensaje y cierro el programa
+			}
 		}
 		case 3 ->{//si la opción es 3
 			rellenarAsientosNormales(array);//relleno los asientos normales
@@ -512,15 +506,15 @@ public class BoletinArrays {
 	 * @param array es el array donde estarán almacenados los datos
 	 */
 	public static void escogerAsiento(int[]array) {
-		int opcionFumar;
-		preguntarFumar();//muestro la pregunta
-		opcionFumar=Teclado.recogerOpcionMenu(1, 2);//recojo el valor valido entre 1 y 2 y lo almaceno en la variable
-		if (opcionFumar==1) {//si fuma
-			gestionReservaAsientoSiFuma(array, opcionFumar);//llamo a este método
-		}else {//si no fuma 
-			gestionReservaAsientoNoFuma(array, opcionFumar);//llamo a este método
-		}
 		
+			int opcionFumar;
+			preguntarFumar();//muestro la pregunta
+			opcionFumar=Teclado.recogerOpcionMenu(1, 2);//recojo el valor valido entre 1 y 2 y lo almaceno en la variable
+			if (opcionFumar==1) {//si fuma
+				gestionReservaAsientoSiFuma(array, opcionFumar);//llamo a este método
+			}else {//si no fuma 
+				gestionReservaAsientoNoFuma(array, opcionFumar);//llamo a este método
+			}
 		
 	}
 	/**
@@ -536,7 +530,7 @@ public class BoletinArrays {
 			opcion=Teclado.recogerOpcionMenu(1, 2);//recojo la opcion valida entre 1 y 2
 			if (opcion==1) {//si el pasajero  quiere un asiento para fumadores
 				mostrarAsientosDisponiblesFumadores(array);//muestro los asientos disponibles
-				recogerValorAsiento(array,1);//recojo el valor y lo inserto en el array
+				recogerValorAsiento(array,1);//recojo el valor y lo inserto en el array y le paso como opción un 1 para validar las posiciones del 16 al 20
 			}else {//si el pasajero no quiere el asiento de fumadores 
 				System.out.println("El próximo vuelo saldrá mañana");//muestro el mensaje
 			}
@@ -604,5 +598,18 @@ public class BoletinArrays {
 		for (int i = array.length-5; i < array.length; i++) {
 			array[i]=1;
 		}
+	}
+	/**
+	 * Método que comprueba si todas las posicioes de un array están rellenas(en este caso con un valor de 1)
+	 * @param array es el array donde comprobamos los valores
+	 * @return devuelve true o false en función de si se cumple o no la condición
+	 */
+	public static boolean comprobarAvionLLeno(int[] array) {
+		boolean lleno=false;
+		if (comprobarAsientos(array)&&comprobarAsientosFumadores(array)) {//llamo a dos métodos que comprueban las posiciones del array
+			//el primer método comprueba desde la posicion 0 a la posicion 14 y el segundo metodo comprueba desde la posicion 15 a la 19
+			lleno=true;//si ambos métodos devuelven true lleno coge el valor de true
+		}
+		return lleno;//devuelvo el valor
 	}
 }
