@@ -443,12 +443,15 @@ public class BoletinArrays {
 	public static boolean comprobarAsientosFumadores(int array[]) {
 		int contador=0;
 		boolean relleno=false;
-		for (int i = array.length-5; i < array.length; i++) {//ejecuto el bucle desde la posicion de la extensión del bucle menos 5 hasta que finalice el bucle o hasta que se encuentre el valor 0
+		boolean fin=false;
+		for (int i = array.length-5; i < array.length&&!fin; i++) {//ejecuto el bucle desde la posicion de la extensión del bucle menos 5 hasta que finalice el bucle o hasta que se encuentre el valor 0
 			if (array[i]==1) {//si la posicion es mayor o igual a la extensión del array menos 5 y el valor de cada posición es 1 
 				contador++;//aumento el contador
 				if (contador==5) {//si el contador es igual a 5
 					relleno=true;//relleno vale true
 				}
+			}else {
+				fin=true;
 			}
 		}
 		return relleno;//devuelvo el valor de la variable relleno
@@ -462,12 +465,15 @@ public class BoletinArrays {
 	public static boolean comprobarAsientos(int array[]) {
 		int contador=0;
 		boolean relleno=false;
-		for (int i = 0; i < array.length-5; i++) {//el bucle se ejecuta hasta llegar a la extensión del array menos 5 ó encuentre una posición con un valor 0
+		boolean fin=false;
+		for (int i = 0; i < array.length-5&&!fin; i++) {//el bucle se ejecuta hasta llegar a la extensión del array menos 5 ó encuentre una posición con un valor 0
 			if (array[i]==1) {//si la i es mayor o igual que 0 y la i es menor que la extensión del array menos 5 y todas las posiciones tienen un valor 1
 				contador++;//aumento el contador
 				if (contador==15) {//si el contador es igual a 15
 					relleno=true;//relleno vale true
 				}
+			}else {
+				fin=true;
 			}
 		}
 		return relleno;//devuelvo el valor de relleno
