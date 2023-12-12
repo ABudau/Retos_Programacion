@@ -349,7 +349,6 @@ public class BoletinArrays {
 
 	private static void ejercicio6() {
 		int opcion;
-
 		int array[]= new int[20];
 
 		
@@ -419,7 +418,7 @@ public class BoletinArrays {
 	 */
 	public static void mostrarAsientosDisponibles(int[] array){
 		System.out.print("Elija el número de asiento -> ");
-		for (int i = 0; i < array.length-5; i++) {//recorro la i desde el 1 al 15
+		for (int i = 0; i < array.length-6; i++) {//recorro la i desde el 1 al 14
 			if (array[i]==0) {//compruebo el valor de la posición
 				System.out.print(i+1+" ");//muestro la posición incrementandola en 1
 			}
@@ -450,7 +449,7 @@ public class BoletinArrays {
 	public static boolean comprobarAsientosFumadores(int array[]) {
 		int contador=0;
 		boolean relleno=false;
-		for (int i = array.length-5; i < array.length&&array[i]!=1; i++) {//ejecuto el bucle desde la posicion de la extensión del bucle menos 5 hasta que finalice el bucle o hasta que se encuentre el valor 0
+		for (int i = array.length-5; i < array.length; i++) {//ejecuto el bucle desde la posicion de la extensión del bucle menos 5 hasta que finalice el bucle o hasta que se encuentre el valor 0
 			if (array[i]==1) {//si la posicion es mayor o igual a la extensión del array menos 5 y el valor de cada posición es 1 
 				contador++;//aumento el contador
 				if (contador==5) {//si el contador es igual a 5
@@ -469,8 +468,8 @@ public class BoletinArrays {
 	public static boolean comprobarAsientos(int array[]) {
 		int contador=0;
 		boolean relleno=false;
-		for (int i = 0; i < array.length-5&&array[i]!=1; i++) {//el bucle se ejecuta hasta llegar a la extensión del array menos 5 ó encuentre una posición con un valor 0
-			if (i>=0&&i<array.length-5&&array[i]==1) {//si la i es mayor o igual que 0 y la i es menor que la extensión del array menos 5 y todas las posiciones tienen un valor 1
+		for (int i = 0; i < array.length-5; i++) {//el bucle se ejecuta hasta llegar a la extensión del array menos 5 ó encuentre una posición con un valor 0
+			if (array[i]==1) {//si la i es mayor o igual que 0 y la i es menor que la extensión del array menos 5 y todas las posiciones tienen un valor 1
 				contador++;//aumento el contador
 				if (contador==15) {//si el contador es igual a 15
 					relleno=true;//relleno vale true
@@ -496,7 +495,7 @@ public class BoletinArrays {
 				asiento=Teclado.recogerValorValido(1, array.length-5)-1;//recojo el valor válido entre los rangos
 			}
 			
-			if (array[asiento]!=1) {//si la posición del array es 0
+			if (array[asiento]!=1) {//si la posición del array vale 0
 				
 				array[asiento]=1;//asigno el valor 1 a la posicion
 				vacio=true;//valido coge el valor de true y el bucle terminaria
@@ -537,7 +536,7 @@ public class BoletinArrays {
 			opcion=Teclado.recogerOpcionMenu(1, 2);//recojo la opcion valida entre 1 y 2
 			if (opcion==1) {//si el pasajero  quiere un asiento para fumadores
 				mostrarAsientosDisponiblesFumadores(array);//muestro los asientos disponibles
-				recogerValorAsiento(array,opcionFumar);//recojo el valor y lo inserto en el array
+				recogerValorAsiento(array,1);//recojo el valor y lo inserto en el array
 			}else {//si el pasajero no quiere el asiento de fumadores 
 				System.out.println("El próximo vuelo saldrá mañana");//muestro el mensaje
 			}
@@ -558,7 +557,7 @@ public class BoletinArrays {
 			opcion=Teclado.recogerOpcionMenu(1, 2);//recojo la opcion valida entre 1 y 2
 			if (opcion==1) {//Si quiere asiento normal
 				mostrarAsientosDisponibles(array);//muestro los asientos
-				recogerValorAsiento(array,opcionFumar);//recojo e inserto el valor 1 en la posicion especificada
+				recogerValorAsiento(array,2);//recojo e inserto el valor 1 en la posicion especificada,y le paso como opcion un 2 para validar los asientos del 1 al 15
 			}else {//si no quiere asiento normal
 				System.out.println("El próximo vuelo saldrá mañana");//muestro el mensaje
 			}
